@@ -13,7 +13,7 @@ sudo make install
 Clone this repository and build it
 ```
 git clone  https://github.com/SD-320808/behaviortree2.git
-cd catkin_ws
+cd behaviortree2/catkin_ws
 catkin_make
 source devel/setup.bash
 ```
