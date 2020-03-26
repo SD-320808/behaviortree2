@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence name="door_number">
+            <Action ID="which_door" door_no="{doorno}" name=""/>
+            <Action ID="Moving" move="{doorno}" name=""/>
+            <Fallback name="root_Fallback">
+                <Sequence name="door_open_sequence">
+                    <Condition ID="IsDoorOpen" name="" port="{doorno}"/>
+                    <Action ID="PassThroughDoor" name=""/>
+                    <Action ID="CloseDoor" name=""/>
+                </Sequence>
+                <SubTree ID="DoorClosed"/>
+                <Action ID="PassThroughWindow" name=""/>
+            </Fallback>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <BehaviorTree ID="DoorClosed">
+        <Sequence name="door_closed_sequence">
+            <Condition ID="HaveKey" doorkey="{doorno}" name=""/>
+            <Action ID="OpenDoor" name=""/>
+            <Action ID="PassThroughDoor" name=""/>
+            <Action ID="CloseDoor" name=""/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="CloseDoor"/>
+        <SubTree ID="DoorClosed"/>
+        <Condition ID="HaveKey">
+            <input_port name="doorkey"/>
+        </Condition>
+        <Condition ID="IsDoorOpen">
+            <input_port name="port"/>
+        </Condition>
+        <Action ID="Moving">
+            <input_port name="move"/>
+        </Action>
+        <Action ID="OpenDoor"/>
+        <Action ID="PassThroughDoor"/>
+        <Action ID="PassThroughWindow"/>
+        <Action ID="which_door">
+            <output_port name="door_no"/>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+
